@@ -1,3 +1,14 @@
+# Steps:
+1. Set up server
+2. Logging
+3. Data models
+4. Handlers
+5. in-memory data store
+6. Db and CRUD operations
+7. 
+
+
+
 # go-native-http
 This project is leverages Golang's native http package for implementing CRUD operations
 
