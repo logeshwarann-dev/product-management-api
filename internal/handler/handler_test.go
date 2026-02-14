@@ -39,17 +39,88 @@ func TestGetAllProducts(t *testing.T) {
 }
 
 func TestGetProductById(t *testing.T) {
-
+	testcases := []struct {
+		name           string
+		expectedStatus int
+		expectedErr    error
+	}{
+		{
+			name:           "not_implemented",
+			expectedStatus: http.StatusNotImplemented,
+		},
+	}
+	for _, tc := range testcases {
+		t.Run(tc.name, func(t *testing.T) {
+			w := httptest.NewRecorder()
+			r := httptest.NewRequest(http.MethodGet, "/products/123", nil)
+			handler.GetProductById(nil)(w, r)
+			assert.Equal(t, tc.expectedStatus, w.Result().StatusCode)
+		})
+	}
 }
 
 func TestAddProduct(t *testing.T) {
+	testcases := []struct {
+		name           string
+		expectedStatus int
+		expectedErr    error
+	}{
+		{
+			name:           "not_implemented",
+			expectedStatus: http.StatusNotImplemented,
+		},
+	}
 
+	for _, tc := range testcases {
+		t.Run(tc.name, func(t *testing.T) {
+			w := httptest.NewRecorder()
+			r := httptest.NewRequest(http.MethodPost, "/products", nil)
+			handler.AddProduct(nil)(w, r)
+			assert.Equal(t, tc.expectedStatus, w.Result().StatusCode)
+		})
+	}
 }
 
 func TestUpdateProduct(t *testing.T) {
+	testcases := []struct {
+		name           string
+		expectedStatus int
+		expectedErr    error
+	}{
+		{
+			name:           "not_implemented",
+			expectedStatus: http.StatusNotImplemented,
+		},
+	}
 
+	for _, tc := range testcases {
+		t.Run(tc.name, func(t *testing.T) {
+			w := httptest.NewRecorder()
+			r := httptest.NewRequest(http.MethodPut, "/product/123", nil)
+			handler.UpdateProductById(nil)(w, r)
+			assert.Equal(t, tc.expectedStatus, w.Result().StatusCode)
+		})
+	}
 }
 
 func TestDeleteProduct(t *testing.T) {
+	testcases := []struct {
+		name           string
+		expectedStatus int
+		expectedErr    error
+	}{
+		{
+			name:           "not_implemented",
+			expectedStatus: http.StatusNotImplemented,
+		},
+	}
 
+	for _, tc := range testcases {
+		t.Run(tc.name, func(t *testing.T) {
+			w := httptest.NewRecorder()
+			r := httptest.NewRequest(http.MethodDelete, "/products/123", nil)
+			handler.DeleteProductById(nil)(w, r)
+			assert.Equal(t, tc.expectedStatus, w.Result().StatusCode)
+		})
+	}
 }
