@@ -1,6 +1,7 @@
 package router
 
 import (
+	"go-native-http/internal/handler"
 	"net/http"
 )
 
@@ -8,11 +9,12 @@ type Router struct {
 	Mux *http.ServeMux
 }
 
-func (r *Router) New() *http.ServeMux {
-	r.Mux.HandleFunc("GET /products", func(w http.ResponseWriter, r *http.Request) {})
-	r.Mux.HandleFunc("GET /products/{product_id}", func(w http.ResponseWriter, r *http.Request) {})
-	r.Mux.HandleFunc("POST /products", func(w http.ResponseWriter, r *http.Request) {})
-	r.Mux.HandleFunc("PUT /products/{product_id}", func(w http.ResponseWriter, r *http.Request) {})
+func (r *Router) New(ps handler.ProductStore) *http.ServeMux {
+	r.Mux.HandleFunc("GET /products", handler.GetAllProducts(ps))
+	r.Mux.HandleFunc("GET /products/{product_id}", handler.GetProductById(ps))
+	r.Mux.HandleFunc("POST /products", handler.AddProduct(ps))
+	r.Mux.HandleFunc("PUT /products/{product_id}", handler.UpdateProductById(ps))
+	r.Mux.HandleFunc("DELETE /products/{product_id}", handler.DeleteProductById(ps))
 	return r.Mux
 }
 
