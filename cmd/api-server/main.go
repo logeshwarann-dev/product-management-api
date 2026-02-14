@@ -18,7 +18,7 @@ func main() {
 	r := router.Router{
 		Mux: http.NewServeMux(),
 	}
-	router := r.New()
+	router := r.New(nil)
 	handler := r.AddCORS(router)
 	wrappedRouter := middleware.InjectLogger(log, middleware.AddLoggerToRequest(handler))
 	server := &http.Server{
