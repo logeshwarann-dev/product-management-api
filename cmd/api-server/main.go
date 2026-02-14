@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"go-native-http/internal/middleware"
 	"go-native-http/internal/router"
+	"go-native-http/internal/store"
 	"log/slog"
 	"net/http"
 	"os"
@@ -18,7 +19,8 @@ func main() {
 	r := router.Router{
 		Mux: http.NewServeMux(),
 	}
-	router := r.New(nil)
+	s := store.New()
+	router := r.New(s)
 	handler := r.AddCORS(router)
 	wrappedRouter := middleware.InjectLogger(log, middleware.AddLoggerToRequest(handler))
 	server := &http.Server{
