@@ -27,7 +27,7 @@ func main() {
 		Handler:           wrappedRouter,
 	}
 
-	log.Info("starting the server on port %d", serverPort)
+	log.Info("starting the server on", "port", server.Addr)
 	if err := server.ListenAndServe(); err != nil {
 		log.Error("error running server", "error", err)
 	}
