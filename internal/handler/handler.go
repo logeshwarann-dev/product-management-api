@@ -1,13 +1,21 @@
 package handler
 
-import "net/http"
+import (
+	"go-native-http/internal/store"
+	"net/http"
+)
 
 type ProductStore interface {
-	Create()
-	GetAll()
-	GetById()
-	UpdateById()
-	DeleteById()
+	// Create a new product
+	Create(record store.Product) (store.Product, error)
+	// Fetch all products
+	GetAll() (store.Products, error)
+	// Fetch a product using its id
+	GetById(id string) (store.Product, error)
+	// Update a product using its id
+	UpdateById(id string, record store.Product) (store.Product, error)
+	// Delete a product using its id
+	DeleteById(id string) error
 }
 
 func GetAllProducts(ps ProductStore) http.HandlerFunc {
